@@ -11,6 +11,7 @@ var button;
 //var amp;
 var mic;
 var col;
+//var analyzer;
 //audioOut
 
 
@@ -37,6 +38,9 @@ function setup(){
     //background(51);
     mic = new p5.AudioIn();
     mic.start();
+    
+    //amp = new p5.Amplitude();
+    //analyzer.setInput(mic);
 
     //edited out for now to see if I can effect any background change using draw fucntion
     
@@ -106,8 +110,17 @@ function windowResized() {
 function draw(){
 	background(0);
 	var vol = mic.getLevel();
+    //var amp = amp.getLevel();
+    //var rms = analyzer.getLevel;
+    fill(150,50,100);
 	ellipse(shapePositionX,300,200, vol*10000);
-	console.log(vol);
+    console.log(vol);
+    //rect(shapePositionX,shapePositionX/2,200,amp*9000);
+    //line(shapePositionX,shapePositionX, shapePositionX*rms, shapePositionX*rms);
+	
+    //}
+
+
 
 	//var vol = amp.getLevel();
 	//var diam = map(vol,0,1,20,300);
