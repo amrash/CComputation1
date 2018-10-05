@@ -2,6 +2,7 @@
 var button;
 var mic;
 var col;
+
  var volhistory =[];
  backstep = 30;
  circles = 5;
@@ -18,13 +19,10 @@ function setup(){
     mic = new p5.AudioIn();
     mic.start();
 
-  
     
 
 
 }
-
-
 
 
 
@@ -40,7 +38,23 @@ function windowResized() {
 }
 
 function draw(){
-  
+  background(250);
+  var vol = mic.getLevel();
+    console.log(vol);
+    volhistory.push(vol);
+    var brighter = 25;
+    
+  for (i=0;i<(circles);i++) {
+     if (volhistory.length > backstep * i ) {
+        push();
+        noStroke();
+            fill(random(100)+i*brighter,random(100)+i*brighter,random(100)+i*brighter);
+            ellipse(shapePositionX,shapePositionY,shapeWidth, volhistory[backstep * i] * multiplier);
+        pop();
+
+     }
+}
+    
   noFill();
   push();
   var currentY = map(vol, 0, 1, height, 0);
@@ -62,24 +76,8 @@ function draw(){
   stroke(255, 0, 0);
   line(volhistory.length, 0, volhistory.length, height);
 
-  background(250);
-  var vol = mic.getLevel();
-    console.log(vol);
-    volhistory.push(vol);
-    var brighter = 25;
-    
-  for (i=0;i<(circles);i++) {
-     if (volhistory.length > backstep * i ) {
-        push();
-        noStroke();
-            fill(100+i*brighter,50+i*brighter,100+i*brighter);
-            ellipse(shapePositionX,shapePositionY,shapeWidth, volhistory[backstep * i] * multiplier);
-        pop();
 
-     }
 }
-
 
   
 
-}
